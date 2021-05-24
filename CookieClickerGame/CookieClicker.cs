@@ -7,8 +7,9 @@ namespace CookieClickerGame
 {
     class CookieClicker : ReceiveActor
     {
-        public CookieClicker()
+        public CookieClicker(IActorRef timer)
         {
+            timer.Tell(new Timer.Subscribe());
             Receive<Timer.Tick>(HandleTick);
         }
 

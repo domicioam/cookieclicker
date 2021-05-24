@@ -14,8 +14,12 @@ namespace CookieClickerGameTests
         public void Should_start_timer()
         {
             var timer = Sys.ActorOf(Props.Create(() => new Timer()), "timer");
-            var start = new Timer.Start(TimeSpan.FromSeconds(5));
-
+            var start = new Timer.Start(TimeSpan.FromSeconds(3));
+            var probe = CreateTestProbe();
+            
+            timer.Tell(start);
+            timer.Tell(new Timer.Subscribe(), probe);
+            probe.ExpectMsg<Timer.Tick>(TimeSpan.FromSeconds(5));
         }
     }
 }

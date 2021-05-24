@@ -19,19 +19,28 @@ namespace CookieClickerGame
         }
         public class Stop { }
         public class Tick { }
+        public class Subscribe { }
         #endregion
 
         private ICancelable cancelable;
+        protected HashSet<IActorRef> Subscribers;
 
         public Timer()
         {
+            Subscribers = new HashSet<IActorRef>();
             Receive<Start>(HandleStart);
         }
 
         private void Started()
         {
+            Receive<Subscribe>(HandleSubscribe);
             Receive<Stop>(HandleStop);
             Receive<Tick>(HandleTick);
+        }
+
+        private void HandleSubscribe(Subscribe obj)
+        {
+            Subscribers.Add(Sender);
         }
 
         private void HandleStart(Start msg)
@@ -51,8 +60,8 @@ namespace CookieClickerGame
 
         private void HandleTick(Tick msg)
         {
-            // publish tick to all listeners
-            throw new NotImplementedException();
+            foreach (var sub in Subscribers)
+                sub.Tell(msg);
         }
 
         private void HandleStop(Stop obj)

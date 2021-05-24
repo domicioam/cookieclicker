@@ -12,7 +12,8 @@ namespace CookieClickerGameTests
         public void Should_buy_clicker()
         {
             var score = Sys.ActorOf(Props.Create(() => new Score()), "score");
-            var cookieStore = Sys.ActorOf(Props.Create(() => new ClickerStore()), "cookieStore");
+            var timer = Sys.ActorOf(Props.Create(() => new Timer()), "timer");
+            var cookieStore = Sys.ActorOf(Props.Create(() => new ClickerStore(timer)), "cookieStore");
          
             score.Tell(new Score.Increase());
             score.Tell(new Score.Increase());

@@ -21,10 +21,13 @@ namespace CookieClickerGame
         }
 
         #endregion
-        public ClickerStore()
+        public ClickerStore(IActorRef timer)
         {
             ReceiveAsync<BuyClicker>(HandleBuyClickerAsync);
+            Timer = timer;
         }
+
+        public IActorRef Timer { get; }
 
         private async Task HandleBuyClickerAsync(BuyClicker msg)
         {
@@ -32,7 +35,7 @@ namespace CookieClickerGame
 
             if (result.IsSuccess)
             {
-                var clicker = Context.System.ActorOf(Props.Create(() => new CookieClicker()));
+                var clicker = Context.System.ActorOf(Props.Create(() => new CookieClicker(Timer)));
                 Sender.Tell(new Result<IActorRef>(clicker));
             }
             else
