@@ -5,17 +5,20 @@ using System.Text;
 
 namespace CookieClickerGame
 {
-    class CookieClicker : ReceiveActor
+    public class CookieClicker : ReceiveActor
     {
-        public CookieClicker(IActorRef timer)
+        public CookieClicker(IActorRef timer, IActorRef cookie)
         {
             timer.Tell(new Timer.Subscribe());
             Receive<Timer.Tick>(HandleTick);
+            Cookie = cookie;
         }
+
+        public IActorRef Cookie { get; }
 
         private void HandleTick(Timer.Tick obj)
         {
-            throw new NotImplementedException();
+            Cookie.Tell(new Cookie.Click());
         }
     }
 }

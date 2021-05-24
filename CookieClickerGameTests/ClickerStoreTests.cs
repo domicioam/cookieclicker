@@ -13,7 +13,8 @@ namespace CookieClickerGameTests
         {
             var score = Sys.ActorOf(Props.Create(() => new Score()), "score");
             var timer = Sys.ActorOf(Props.Create(() => new Timer()), "timer");
-            var cookieStore = Sys.ActorOf(Props.Create(() => new ClickerStore(timer)), "cookieStore");
+            var cookie = Sys.ActorOf(Props.Create(() => new Cookie(score)), "cookie");
+            var cookieStore = Sys.ActorOf(Props.Create(() => new ClickerStore(timer, cookie)), "cookieStore");
          
             score.Tell(new Score.Increase());
             score.Tell(new Score.Increase());
