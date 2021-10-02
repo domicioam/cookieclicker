@@ -401,3 +401,5 @@ target/
 .metals
 .bloop
 .metals
+.scalafmt.conf
+metals.sbt

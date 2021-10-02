@@ -1,28 +1,15 @@
 ﻿using Akka.Actor;
 using Akka.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CookieClickerGame
 {
     public class Score : ReceiveActor
     {
-        #region
-        public class Increase { }
-        public class Decrease
-        {
-            public int Amount { get; set; }
-
-            public Decrease(int amount)
-            {
-                Amount = amount;
-            }
-        }
-        public class GetScore
-        {
-        }
-        #endregion
+        #region Messages
+        public record Increase;
+        public record Decrease(int Amount);
+        public record GetScore;
+        #endregion Messages
 
         private int score;
 
@@ -54,6 +41,4 @@ namespace CookieClickerGame
             score++;
         }
     }
-
-
 }
