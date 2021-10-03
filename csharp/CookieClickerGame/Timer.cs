@@ -1,22 +1,13 @@
 ﻿using Akka.Actor;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CookieClickerGame
 {
     public class Timer : ReceiveActor
     {
         #region Messages
-        public class Start
-        {
-            public Start(TimeSpan interval)
-            {
-                Interval = interval;
-            }
-
-            public TimeSpan Interval { get; }
-        }
+        public record Start(TimeSpan Interval);
         public class Stop { }
         public class Tick { }
         public class Subscribe { }
