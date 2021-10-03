@@ -11,5 +11,8 @@ class Cookie(score: ActorRef) extends Actor {
 }
 
 object Cookie {
+    def apply(score: ActorRef): Cookie = {
+        new Cookie(score)
+    }
     case class Click()
 }

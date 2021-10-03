@@ -5,12 +5,12 @@ import akka.testkit.TestKit
 import akka.actor.ActorSystem
 import akka.testkit.TestProbe
 import akka.actor.Props
-import Timer._
-import scala.concurrent.duration._
 import akka.testkit.ImplicitSender
+import scala.concurrent.duration._
+import Timer._
 
 class TimerSpec
-    extends TestKit(ActorSystem("CookieSpec"))
+    extends TestKit(ActorSystem("TimerSpec"))
     with AnyWordSpecLike
     with ImplicitSender {
 
