@@ -25,11 +25,11 @@ class ClickerStore(timer: ActorRef, cookie: ActorRef)
 
   def piped(sender: ActorRef): Receive = {
     case true =>
-        log.info("Clicker bought with success!")
+      log.info("Clicker bought with success!")
       sender ! context.system.actorOf(Props(CookieClicker(timer, cookie)))
-    case false => 
-        log.info("Unable to buy clicker!")
-        sender ! "Not enough points!"
+    case false =>
+      log.info("Unable to buy clicker!")
+      sender ! "Not enough points!"
   }
 }
 
