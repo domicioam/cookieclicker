@@ -1,7 +1,6 @@
 package cookieclicker
 
-import akka.actor.{Actor, ActorLogging, Props}
-import akka.actor.ActorRef
+import akka.actor.{Actor, ActorLogging, Props, ActorRef}
 import akka.pattern.{ask, pipe}
 import akka.util.Timeout
 import scala.concurrent.duration._
